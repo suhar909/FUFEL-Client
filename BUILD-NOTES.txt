@@ -1,3 +1,0 @@
-This archive includes the Gradle wrapper properties but not the wrapper launcher JAR/scripts.
-If Gradle is installed, run: gradle wrapper --gradle-version 8.14
-Then run gradlew.bat build on Windows.
