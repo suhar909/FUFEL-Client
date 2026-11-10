@@ -8,6 +8,7 @@ import net.minecraft.network.chat.Component;
 public final class ClickGuiScreen extends Screen {
     private static final int GREEN = 0xFF7CFF4D;
     private static final int PANEL = 0xF0121712;
+    private static final int BACKDROP = 0x66000000;
 
     public ClickGuiScreen() {
         super(Component.literal("FUFEL CLIENT"));
@@ -49,7 +50,10 @@ public final class ClickGuiScreen extends Screen {
 
     @Override
     public void render(GuiGraphics graphics, int mouseX, int mouseY, float partialTick) {
-        renderBackground(graphics, mouseX, mouseY, partialTick);
+        // Minecraft 1.21.11 prepares the screen background/blur before this render call.
+        // Calling renderBackground() here requests a second blur and crashes with
+        // "Can only blur once per frame". Use a simple translucent fill instead.
+        graphics.fill(0, 0, this.width, this.height, BACKDROP);
 
         int panelWidth = 220;
         int panelHeight = 190;
